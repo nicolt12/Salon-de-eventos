@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  height: 80px;
+  height: 70px;
   background: #1e1e1e;
   z-index: 1000;
   display: flex;
@@ -18,25 +18,22 @@
   margin: 0;
 }
 
-.menu-container {
-  position: relative;
-}
-
 .menu-toggle {
   background: none;
   border: none;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
-  display: none;
+  display: none; /* oculto en desktop */
 }
 
+/* Links base */
 .nav-links {
-  display: flex;
   list-style: none;
+  display: flex;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
-  gap: 1.5rem;
 }
 
 .nav-links li a {
@@ -44,70 +41,61 @@
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s;
-  padding: 0.5rem 0;
 }
 
-.nav-links li a:link:hover,
-.nav-links li a:visited:hover,
-.nav-links li a:active:hover {
+.nav-links li a:hover {
   color: #b39ddb;
 }
-.nav-links li a:visited {
-  color: white;
-}
-/* Mantén todos tus estilos existentes hasta la media query */
 
+/* Botón logout */
+.logout-btn {
+  background: transparent;
+  border: 1px solid #ce93d8;
+  color: #ce93d8;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #ce93d8;
+  color: #2c2c2c;
+}
+
+/* ✅ Mobile */
 @media (max-width: 768px) {
-  .navbar {
-    height: 70px;
-  }
-  
   .menu-toggle {
-    display: block;
+    display: block; /* visible en mobile */
   }
-  
+
   .nav-links {
     position: fixed;
     top: 70px;
     left: 0;
     width: 100%;
-    background: #2c2c2c;
     flex-direction: column;
     align-items: center;
-    padding: 0; /* Cambiado de 1rem 0 */
-    gap: 0;
+    background: #2c2c2c;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
-  
+
   .nav-links.open {
-    max-height: 500px;
-    padding: 1rem 0; /* Padding solo cuando está abierto */
+    max-height: 500px; /* se despliega */
+    padding: 1rem 0;
   }
-  
+
   .nav-links li {
     width: 100%;
     text-align: center;
-    height: 0; /* Inicialmente sin altura */
-    overflow: hidden;
-    transition: height 0.3s ease;
   }
-  
-  .nav-links.open li {
-    height: auto; /* Altura automática cuando está abierto */
-  }
-  
+
   .nav-links li a {
     display: block;
     padding: 1rem;
     border-top: 1px solid #444;
-    opacity: 0;
-    transition: opacity 0.3s ease 0.1s;
-  }
-  
-  .nav-links.open li a {
-    opacity: 1;
   }
 }

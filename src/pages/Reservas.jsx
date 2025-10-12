@@ -1,25 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./Reservas.css";
-import { FaTrash, FaUserClock } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Reservas() {
   const [turnos, setTurnos] = useState([]);
+  const [ultimaCantidad, setUltimaCantidad] = useState(0);
+  const isFirstLoad = useRef(true); // 👈 flag para evitar notificación inicial
 
   useEffect(() => {
     const fetchTurnos = async () => {
       try {
-        const res = await fetch("/api/reservas");;
+        const res = await fetch("http://localhost:5000/api/reservas");
         const data = await res.json();
-        console.log(data);
-
         const visitas = data.filter((r) => r.nombre);
+
+        if (!isFirstLoad.current && visitas.length > ultimaCantidad) {
+          toast.success("¡Nueva reserva recibida!");
+        }
+
         setTurnos(visitas);
+        setUltimaCantidad(visitas.length);
+        isFirstLoad.current = false; // 👈 desactivamos el flag después del primer fetch
       } catch (err) {
         console.error("Error al obtener turnos:", err);
+        toast.error("Error al obtener turnos");
       }
     };
-    fetchTurnos();
-  }, []);
+
+    fetchTurnos(); // al montar
+
+    const interval = setInterval(fetchTurnos, 10000); // cada 10 segundos
+    return () => clearInterval(interval);
+  }, [ultimaCantidad]);
 
   const eliminarTurno = async (id) => {
     if (!window.confirm("¿Eliminar este turno de visita?")) return;
@@ -30,15 +44,13 @@ function Reservas() {
       setTurnos(turnos.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Error al eliminar:", err);
-      alert("No se pudo eliminar el turno.");
+      toast.error("No se pudo eliminar el turno.");
     }
   };
 
   return (
     <div className="reservas-wrapper">
-      <h2>
-        Turnos agendados para visitar el salón
-      </h2>
+      <h2>Turnos agendados para visitar el salón</h2>
 
       {turnos.length === 0 ? (
         <p>No hay turnos registrados.</p>
@@ -75,6 +87,8 @@ function Reservas() {
           </tbody>
         </table>
       )}
+
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
   );
 }

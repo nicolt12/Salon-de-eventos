@@ -9,25 +9,26 @@ const eventos = [
   {
     titulo: "Cumpleaños de Sofía",
     fotos: [
-      "/galeria/evento1a.jpg",
-      "/galeria/evento1b.jpg",
-      "/galeria/evento1c.jpg",
+      "/galeria/cumplesofia1.jpg",
+      "/galeria/cumplesofia2.jpg",
+      "/galeria/cumplesofia3.jpeg",
     ],
-  },
+  }, 
+  /*C:\Users\Nico\salon-app\salon-de-eventos\public\galeria\egresaditos1.jpeg*/ 
   {
     titulo: "Boda en primavera",
     fotos: [
-      "/galeria/evento2a.jpg",
-      "/galeria/evento2b.jpg",
-      "/galeria/evento2c.jpg",
+      "/galeria/bodaprimavera1.jpg",
+      "/galeria/bodaprimavera2.jpg",
+      "/galeria/bodaprimavera3.jpg",
     ],
   },
   {
     titulo: "Fiesta de egresados",
     fotos: [
-      "/galeria/evento3a.jpg",
-      "/galeria/evento3b.jpg",
-      "/galeria/evento3c.jpg",
+      "/galeria/egresaditos3.jpeg",
+      "/galeria/egresaditos2.jpeg",
+      "/galeria/egresaditos1.jpeg",
     ],
   },
 ];

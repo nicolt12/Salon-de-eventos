@@ -1,9 +1,12 @@
 {
+  "homepage": "https://nicol12.github.io/Salon-de-eventos",
   "name": "salon-de-eventos",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "concurrently \"npm run dev --prefix ../salon-backend\" \"vite\"",
     "build": "vite build",
     "lint": "eslint .",
@@ -14,6 +17,7 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.2",
+    "react-toastify": "^11.0.5",
     "swiper": "^11.2.10"
   },
   "devDependencies": {
