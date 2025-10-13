@@ -1,0 +1,201 @@
+/* ==== Página de galería ==== */
+.galeria-page {
+  background: #1e1e1e;
+  color: #ffffff;
+  padding: 4rem 1rem;
+  min-height: 100vh;
+}
+
+/* ==== Contenedor central ==== */
+.galeria-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ==== Título y subtítulo ==== */
+.galeria-wrapper h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: #d1c4e9;
+  margin-bottom: 1rem;
+}
+
+.galeria-subtitulo {
+  font-size: 1rem;
+  color: #bdbdbd;
+  margin-bottom: 2rem;
+}
+
+/* ==== Grilla de eventos ==== */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* ==== Ítem individual de evento ==== */
+.galeria-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #2c2c2c;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.galeria-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(126, 87, 194, 0.5);
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-item:hover img {
+  filter: brightness(1.1);
+  box-shadow: 0 0 10px rgba(209, 196, 233, 0.2);
+}
+
+.galeria-titulo {
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  color: #d1c4e9;
+}
+
+/* ==== Animación de entrada ==== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.6s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==== Modal fullscreen ==== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 30, 30, 0.95);
+  /* display: flex; */
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 999;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8);
+  animation: zoomFade 0.4s ease-out;
+
+  padding-top: calc(6rem + env(safe-area-inset-top));
+
+}
+
+@keyframes zoomFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==== Swiper Slides ==== */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+
+}
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.swiper-slide img {
+  display: block;
+  width: auto;
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(126, 87, 194, 0.4);
+}
+
+/* ==== Título dentro del modal ==== */
+.modal .galeria-titulo {
+  color: #d1c4e9;
+  /* margin-top: 1rem; */
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ==== Botón cerrar modal ==== */
+.cerrar-modal {
+  position: absolute;
+  font-size: 1.2rem;
+  top: 5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #d1c4e9;
+  z-index: 1001;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  padding: 0.5rem;
+  line-height: 1;
+
+}
+
+.cerrar-modal:hover {
+  transform: rotate(90deg);
+}
+
+/* ==== Responsive ajustes ==== */
+@media (max-width: 480px) {
+  .galeria-item img {
+    height: 160px;
+  }
+
+  .galeria-titulo {
+    font-size: 0.9rem;
+  }
+
+  .modal {
+    padding-top: 6rem;
+  }
+
+  .cerrar-modal {
+    font-size: 1.2rem;
+    top: 4rem;
+    right: 0.5rem;
+  }
+
+    .swiper-slide img {
+    max-height: 60vh;
+    max-width: 90vw;
+  }
+
+}

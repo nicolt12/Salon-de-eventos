@@ -1,0 +1,211 @@
+/* ========================
+   ESTRUCTURA GENERAL HERO
+   ======================== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 8rem;
+  background: linear-gradient(to top, #1e1e1e, #7e57c2);
+  color: #ffffff;
+  text-align: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem 2rem;
+  margin: 0 auto;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.hero-icon {
+  font-size: 2.5rem;
+  color: #d1c4e9;
+  margin-bottom: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+/* HERO TEXTO Y BOTÓN */
+.hero-content h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+.hero-reserva-btn {
+  background: #ffffff;
+  color: #7e57c2;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.hero-reserva-btn:hover {
+  background: #d1c4e9;
+  color: #1e1e1e;
+}
+
+/* ========================
+   SECCIÓN TESTIMONIOS
+   ======================== */
+.testimonios {
+  padding: 4rem 1rem;
+  background: #2c2c2c;
+  color: #e0e0e0;
+  text-align: center;
+}
+
+.testimonios h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin-bottom: 2.5rem;
+  color: #d1c4e9;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.testimonios h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, #b39ddb, #7e57c2);
+  border-radius: 2px;
+}
+
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.testimonio {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  transition: transform 0.3s ease;
+}
+
+.testimonio:hover {
+  transform: translateY(-4px);
+}
+
+.testimonio span {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #b39ddb;
+}
+
+/* ========================
+   ANIMACIONES
+   ======================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.fade-up:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.fade-up:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.fade-up:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem;
+  }
+
+  .hero-content button {
+    width: 100%;
+  }
+
+  .testimonios-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 600px) {
+  .testimonios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .testimonios-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
