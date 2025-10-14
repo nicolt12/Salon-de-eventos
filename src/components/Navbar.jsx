@@ -12,6 +12,11 @@ function Navbar() {
     navigate("/login");
   };
 
+  // ✅ Verificar si hay sesión activa
+  const isAuthenticated =
+    localStorage.getItem("auth") === "true" ||
+    sessionStorage.getItem("auth") === "true";
+
   return (
     <nav className="navbar">
       <h2 className="logo">Salón Familiar</h2>
@@ -33,17 +38,21 @@ function Navbar() {
         <li><Link to="/reserva" onClick={() => setMenuOpen(false)}>Reserva</Link></li>
         <li><Link to="/contacto" onClick={() => setMenuOpen(false)}>Contacto</Link></li>
         <li><Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link></li>
-        <li>
-          <button
-            onClick={() => {
-              setMenuOpen(false);
-              handleLogout();
-            }}
-            className="logout-btn"
-          >
-            Cerrar sesión
-          </button>
-        </li>
+
+        {/* ✅ Mostrar solo si está logueado */}
+        {isAuthenticated && (
+          <li>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                handleLogout();
+              }}
+              className="logout-btn"
+            >
+              Cerrar sesión
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
