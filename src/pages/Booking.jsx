@@ -12,7 +12,9 @@ function Booking() {
 
   const [reservasDelDia, setReservasDelDia] = useState([]);
   const [mensajeExito, setMensajeExito] = useState("");
-  const [cargando, setCargando] = useState(false); // ✅ nuevo estado
+  const [cargando, setCargando] = useState(false);
+
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +32,7 @@ function Booking() {
     const fetchReservas = async () => {
       if (!form.fecha) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/reservas?fecha=${form.fecha}`);
+        const res = await fetch(`${API_URL}/api/reservas?fecha=${form.fecha}`);
         const data = await res.json();
         setReservasDelDia(data);
       } catch (err) {
@@ -47,7 +49,7 @@ function Booking() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (cargando) return; // ✅ evita múltiples envíos
+    if (cargando) return;
     setCargando(true);
 
     const hoy = new Date().toISOString().split("T")[0];
@@ -65,7 +67,7 @@ function Booking() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/reservas", {
+      const response = await fetch(`${API_URL}/api/reservas`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -92,7 +94,7 @@ function Booking() {
       console.error("Error:", error);
       alert("Error de conexión con el servidor.");
     } finally {
-      setCargando(false); // ✅ reactiva el botón
+      setCargando(false);
     }
   };
 
