@@ -14,7 +14,7 @@ function Booking() {
   const [mensajeExito, setMensajeExito] = useState("");
   const [cargando, setCargando] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
