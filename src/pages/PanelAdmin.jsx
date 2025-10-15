@@ -9,6 +9,8 @@ import BarChartReservas from "../components/BarChartReservas";
 import PieChartHorarios from "../components/PieChartHorarios";
 import { jwtDecode } from "jwt-decode";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function PanelAdmin() {
   const navigate = useNavigate();
   const [turnos, setTurnos] = useState([]);
@@ -55,11 +57,9 @@ function PanelAdmin() {
       try {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
-        const res = await fetch("http://localhost:5000/api/reservas/admin", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(`${API_URL}/api/reservas/admin`, {
+  headers: { Authorization: `Bearer ${token}` },
+});
 
         if (!res.ok) throw new Error("Acceso no autorizado");
 
@@ -99,12 +99,10 @@ function PanelAdmin() {
     try {
       const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:5000/api/reservas/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(`${API_URL}/api/reservas/${id}`, {
+  method: "DELETE",
+  headers: { Authorization: `Bearer ${token}` },
+});
 
       if (!res.ok) throw new Error("No autorizado");
 
@@ -131,12 +129,10 @@ function PanelAdmin() {
       const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
       for (const r of antiguos) {
-        await fetch(`http://localhost:5000/api/reservas/${r._id}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await fetch(`${API_URL}/api/reservas/${r._id}`, {
+  method: "DELETE",
+  headers: { Authorization: `Bearer ${token}` },
+});
       }
 
       const actualizados = turnos.filter((r) => r.fecha >= hoy);
