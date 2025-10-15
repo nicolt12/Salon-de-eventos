@@ -3,28 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { getToken, logout } from "../utils/auth";
 
-const isAuthenticated = getToken();
-const handleLogout = () => {
-  logout();
-  navigate("/login");
-};
-
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("rol");
-  localStorage.removeItem("nombre");
-  sessionStorage.removeItem("token");
-  sessionStorage.removeItem("rol");
-  sessionStorage.removeItem("nombre");
-  navigate("/login");
-};
   // ✅ Verificar si hay sesión activa
-  const isAuthenticated =
-  localStorage.getItem("token") || sessionStorage.getItem("token");
+  const isAuthenticated = getToken();
+
+  const handleLogout = () => {
+    logout(); // usa tu helper centralizado
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar">
@@ -52,6 +41,7 @@ function Navbar() {
             <span className="admin-text">Admin</span>
           </Link>
         </li>
+
         {isAuthenticated && (
           <li>
             <button
