@@ -1,0 +1,37 @@
+.metric-card {
+  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.metric-icon {
+  font-size: 2.2rem;
+  color: #6a1b9a;
+}
+
+.metric-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+.metric-info p {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #222;
+}

@@ -8,7 +8,8 @@ import Gallery from "./pages/Gallery";
 import Booking from "./pages/Booking";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
-import Reservas from "./pages/Reservas";
+import PanelAdmin from "./pages/PanelAdmin";
+
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             path="/admin"
             element={
               <PrivateRoute>
-                <Reservas />
+                <PanelAdmin />
               </PrivateRoute>
             }
           />

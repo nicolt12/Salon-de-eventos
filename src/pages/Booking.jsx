@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import "./Booking.css";
 
-
 function Booking() {
   const [form, setForm] = useState({
     nombre: "",
     fecha: "",
     horario: "",
     mensaje: "",
+    email: ""
   });
 
   const [reservasDelDia, setReservasDelDia] = useState([]);
   const [mensajeExito, setMensajeExito] = useState("");
+  const [cargando, setCargando] = useState(false); // ✅ nuevo estado
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,15 +47,20 @@ function Booking() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (cargando) return; // ✅ evita múltiples envíos
+    setCargando(true);
+
     const hoy = new Date().toISOString().split("T")[0];
     if (form.fecha < hoy) {
       alert("No podés seleccionar una fecha pasada.");
+      setCargando(false);
       return;
     }
 
     const [horaInicio] = form.horario.split(":").map(Number);
     if (horaInicio < 10 || horaInicio > 20) {
       alert("Los turnos deben ser entre las 10:00 y las 20:00.");
+      setCargando(false);
       return;
     }
 
@@ -62,13 +68,20 @@ function Booking() {
       const response = await fetch("http://localhost:5000/api/reservas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre: form.nombre, fecha: form.fecha, horario: form.horario, mensaje: form.mensaje,  tipo: "visita", }),
+        body: JSON.stringify({
+          nombre: form.nombre,
+          fecha: form.fecha,
+          horario: form.horario,
+          mensaje: form.mensaje,
+          email: form.email,
+          tipo: "visita",
+        }),
       });
 
       if (response.ok) {
         setMensajeExito("🎉 ¡Turno solicitado con éxito!");
         setTimeout(() => setMensajeExito(""), 4000);
-        setForm({ nombre: "", fecha: "", horario: "", mensaje: "" });
+        setForm({ nombre: "", fecha: "", horario: "", mensaje: "", email: "" });
         setReservasDelDia([]);
       } else if (response.status === 409) {
         alert("Ya hay un turno agendado en ese horario.");
@@ -78,6 +91,8 @@ function Booking() {
     } catch (error) {
       console.error("Error:", error);
       alert("Error de conexión con el servidor.");
+    } finally {
+      setCargando(false); // ✅ reactiva el botón
     }
   };
 
@@ -93,7 +108,14 @@ function Booking() {
           onChange={handleChange}
           required
         />
-
+        <input
+          type="email"
+          name="email"
+          placeholder="Tu correo electrónico"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
         <input
           type="date"
           name="fecha"
@@ -126,18 +148,20 @@ function Booking() {
           value={form.mensaje}
           onChange={handleChange}
         />
-        <button type="submit">Solicitar turno</button>
+        <button type="submit" disabled={cargando}>
+          {cargando ? "Enviando..." : "Solicitar turno"}
+        </button>
       </form>
 
       {mensajeExito && <div className="mensaje-exito">{mensajeExito}</div>}
 
       {form.horario && (
-  <div className="hora-final-wrapper">
-    <p>
-      ⏱️ El turno finalizaría a las <strong>{calcularHoraFin()}</strong>
-    </p>
-  </div>
-)}
+        <div className="hora-final-wrapper">
+          <p>
+            ⏱️ El turno finalizaría a las <strong>{calcularHoraFin()}</strong>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

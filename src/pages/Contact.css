@@ -5,8 +5,10 @@
   align-items: center;
   padding: 5rem 1rem;
   min-height: 100vh;
+  background: linear-gradient(135deg, #1c1c1c, #2c2c2c);
 }
 
+/* ==== CONTENEDOR INTERNO ==== */
 .contact-container {
   background: #2c2c2c;
   padding: 3rem;
@@ -41,22 +43,38 @@
   list-style: none;
   padding: 0;
   margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
+/* ==== ÍTEM INDIVIDUAL ==== */
 .contact-info li {
-  margin-bottom: 1rem;
+  background: #3a3a3a;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid #7e57c2;
+  border-radius: 8px;
   font-size: 1rem;
   color: #e0e0e0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  animation: itemFadeIn 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+  opacity: 0;
+  transition: background 0.3s ease;
+}
+
+.contact-info li:hover {
+  background: #4a4a4a;
 }
 
 /* ==== ENLACES ==== */
 .contact-info a {
   color: #ce93d8;
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
@@ -74,6 +92,11 @@
   .contact-container h2 {
     font-size: 1.8rem;
   }
+
+  .contact-info li {
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
+  }
 }
 
 /* ==== ANIMACIÓN DE ENTRADA DE ÍTEMS ==== */
@@ -86,10 +109,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.contact-info li {
-  animation: itemFadeIn 0.5s ease forwards;
-  animation-delay: calc(var(--i) * 0.1s);
-  opacity: 0;
 }

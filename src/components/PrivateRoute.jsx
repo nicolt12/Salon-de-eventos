@@ -1,20 +1,19 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from "react-router-dom";
 
 function PrivateRoute({ children, requireAdmin = false }) {
-  const isAuthenticated =
-    localStorage.getItem('auth') === 'true' ||
-    sessionStorage.getItem('auth') === 'true'
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
+  const rol =
+    localStorage.getItem("rol") || sessionStorage.getItem("rol");
 
-  const isAdmin =
-    localStorage.getItem('role') === 'admin' ||
-    sessionStorage.getItem('role') === 'admin'
+  const isAuthenticated = !!token;
+  const isAdmin = rol === "admin";
 
-  //  Si requiere admin y no lo es, redirige
   if (requireAdmin && !isAdmin) {
-    return <Navigate to="/login" />
+    return <Navigate to="/login" replace />;
   }
 
-  return isAuthenticated ? children : <Navigate to="/login" />
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 }
 
-export default PrivateRoute
+export default PrivateRoute;

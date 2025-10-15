@@ -7,15 +7,17 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("auth");
-    sessionStorage.removeItem("auth");
-    navigate("/login");
-  };
-
+  localStorage.removeItem("token");
+  localStorage.removeItem("rol");
+  localStorage.removeItem("nombre");
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("rol");
+  sessionStorage.removeItem("nombre");
+  navigate("/login");
+};
   // ✅ Verificar si hay sesión activa
   const isAuthenticated =
-    localStorage.getItem("auth") === "true" ||
-    sessionStorage.getItem("auth") === "true";
+  localStorage.getItem("token") || sessionStorage.getItem("token");
 
   return (
     <nav className="navbar">
@@ -37,9 +39,12 @@ function Navbar() {
         <li><Link to="/galeria" onClick={() => setMenuOpen(false)}>Galería</Link></li>
         <li><Link to="/reserva" onClick={() => setMenuOpen(false)}>Reserva</Link></li>
         <li><Link to="/contacto" onClick={() => setMenuOpen(false)}>Contacto</Link></li>
-        <li><Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link></li>
 
-        {/* ✅ Mostrar solo si está logueado */}
+        <li>
+          <Link to="/admin" onClick={() => setMenuOpen(false)} className="admin-link">
+            <span className="admin-text">Admin</span>
+          </Link>
+        </li>
         {isAuthenticated && (
           <li>
             <button
