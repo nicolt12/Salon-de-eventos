@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { getToken, logout } from "../utils/auth";
+
+const isAuthenticated = getToken();
+const handleLogout = () => {
+  logout();
+  navigate("/login");
+};
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

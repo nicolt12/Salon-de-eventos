@@ -30,30 +30,25 @@ function Login() {
       return;
     }
 
-    console.log("✅ Login exitoso:", data);
+   console.log("✅ Login exitoso:", data);
 
-    if (data.token && data.rol === "admin") {
-      const storage = remember ? localStorage : sessionStorage;
-      storage.setItem("token", data.token);
-      storage.setItem("rol", data.rol);
-      storage.setItem("nombre", data.nombre); 
-      if (data.token && data.rol === "admin") {
-  console.log("📦 Guardando en localStorage...");
+if (data.token && data.rol === "admin") {
+  const storage = remember ? localStorage : sessionStorage;
+
+  console.log("📦 Guardando en almacenamiento...");
   console.log("Token:", data.token);
   console.log("Rol:", data.rol);
   console.log("Nombre:", data.nombre);
 
-  localStorage.setItem("token", data.token);
-  localStorage.setItem("rol", data.rol);
-  localStorage.setItem("nombre", data.nombre);
+  storage.setItem("token", data.token);
+  storage.setItem("rol", data.rol);
+  storage.setItem("nombre", data.nombre);
 
   console.log("✅ Guardado completo");
   navigate("/admin");
+} else {
+  alert("Credenciales inválidas");
 }
-      navigate("/admin");
-    } else {
-      alert("Credenciales inválidas");
-    }
   } catch (err) {
     console.error("❌ Error de conexión:", err);
     alert("Error de conexión con el servidor");

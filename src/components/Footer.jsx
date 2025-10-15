@@ -18,13 +18,18 @@ function Footer() {
         </div>
 
         <div className="footer-social">
-          <a href="https://wa.me/5491155555555" target="_blank" rel="noreferrer">
+          <a href="https://wa.me/54911XXXXXXX" 
+          aria-label="WhatsApp" target="_blank"
+           rel="noreferrer">
             <FaWhatsapp />
           </a>
-          <a href="https://www.instagram.com/tu_salon" target="_blank" rel="noreferrer">
+          <a href="https://www.instagram.com/tu_salon"
+          aria-label="Instagram"
+          target="_blank" rel="noreferrer">
             <FaInstagram />
           </a>
-          <a href="https://www.facebook.com/tu_salon" target="_blank" rel="noreferrer">
+          <a href="https://www.facebook.com/tu_salon" 
+          aria-label="Facebook"target="_blank" rel="noreferrer">
             <FaFacebookF />
           </a>
         </div>

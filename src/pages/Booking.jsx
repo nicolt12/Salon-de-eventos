@@ -108,7 +108,7 @@ function Booking() {
           onChange={handleChange}
           required
         />
-        <input
+        <input 
           type="email"
           name="email"
           placeholder="Tu correo electrónico"
